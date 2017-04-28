@@ -21,9 +21,11 @@ public class App {
 
       get("/", (request, response) -> {
           Map<String, Object> model = new HashMap<String, Object> ();
+        //   model.put("heroes", request.session().attribute("heroes"));
           model.put("template","templates/index.vtl");
           return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
+
         post("/isrealites", (request,response) -> {
             Map<String, Object> model =  new HashMap <String, Object>();
             ArrayList<Hero> heroes = request.session().attribute("heroes");
@@ -38,12 +40,20 @@ public class App {
             String power = request.queryParams("power");
 
             String weakness = request.queryParams("weakness");
+
             Hero newHero = new Hero(name,age,power,weakness);
+            model.put("newHero" , newHero);
             heroes.add(newHero);
 
-            model.put("template", "templates/success.vtl");
+            model.put("template", "templates/hero.vtl");
             return new ModelAndView(model, layout);
           }, new VelocityTemplateEngine());
 
+          get("/added", (request, response) -> {
+              Map<String, Object> model = new HashMap<String, Object> ();
+              model.put("heroes", request.session().attribute("heroes"));
+              model.put("template","templates/success.vtl");
+              return new ModelAndView(model, layout);
+            }, new VelocityTemplateEngine());
       }
 }
