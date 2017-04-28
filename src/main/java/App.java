@@ -32,17 +32,15 @@ public class App {
                 request.session().attribute("heroes" , heroes);
             }
             String name = request.queryParams("name");
-            Hero newHero = new Hero(name);
-            heroes.add(newHero);
+
             int age = Integer.parseInt(request.queryParams("age"));
-             Hero newHero = new Hero(age);
-            heroes.add(newHero);
+
             String power = request.queryParams("power");
-            Hero newHero = new Hero(power);
-            heroes.add(newHero);
+
             String weakness = request.queryParams("weakness");
-            Hero newHero = new Hero(weakness);
+            Hero newHero = new Hero(name,age,power,weakness);
             heroes.add(newHero);
+
             model.put("template", "templates/success.vtl");
             return new ModelAndView(model, layout);
           }, new VelocityTemplateEngine());
