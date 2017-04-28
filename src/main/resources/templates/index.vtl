@@ -1,0 +1,36 @@
+<h1>The Isrealites</h1>
+
+#if ($heroes)
+<ul>
+    ##foreach($hero in $heroes)
+        <h1>$hero.getName</h1>
+        <li>$hero.getAge</li>
+        <li>$hero.getPower</li>
+        <li>$hero.getWeakness</li>
+
+    #end
+</ul>
+#else
+<p>No Heroes Added</p>
+#end
+
+<form class="form_control" action="/isrealites" >
+    <div class="form-group">
+        <label for="name">Length</label>
+        <input type="text" name="name" id="name" class="form_control">
+    </div>
+    <div class="form-group">
+        <label for="age">Width</label>
+        <input type="text" name="age" id="age">
+    </div>
+    <div class="form-group">
+        <label for="power">Width</label>
+        <input type="text" name="power" id="power">
+    </div>
+    <div class="form-group">
+        <label for="weakness">Width</label>
+        <input type="text" name="weakness" id="weakness">
+    </div>
+    <button type="submit" class="btn btn-success">Add hero?</button>
+
+</form>
