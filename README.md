@@ -1,4 +1,4 @@
-# hero-squad
+# Hero-squad (ISREALITES)
 
 Description: A simple application whereby the user can create heroes and squads .
 
