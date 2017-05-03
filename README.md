@@ -14,10 +14,12 @@ The user will enter a hero , give them  attributes such as power and age and fro
 4. Start the application:
   * Windows users should run `gradlew run -q`
   * macOS/Linux/Unix users run `./gradlew run -q`
+ 5. Navigate to your browser and open:        http://localhost:4567/
 
 ## Technologies Used
 * Java
 * Gradle for dependency management and running tasks.
+* Sql Database
 
 ## Author
 Yonko Kilasi
