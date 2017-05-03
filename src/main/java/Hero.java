@@ -4,50 +4,56 @@ import java.util.List;
 import org.sql2o.*;
 
 public class Hero {
-    private String Name;
-    private int Age;
-    private String Power;
-    private String Weakness;
-    private int SquadId;
+    private String name;
+    private int age;
+    private String power;
+    private String weakness;
+    private int squadId;
+    private int id;
 
     public Hero(String name, int age ,String power,String weakness) {
-        this.name = Name;
-        this.age = Age;
-        this.power = Power;
-        this.weakness = Weakness;
-        this.squadId = SquadId;
+        this.name = name;
+        this.age = age;
+        this.power = power;
+        this.weakness = weakness;
+        this.squadId = squadId;
+
     }
     public String getName() {
-        return Name;
+        return name;
     }
     public int getAge() {
-        return Age;
+        return age;
     }
     public String getPower() {
-        return Power;
+        return power;
     }
     public String getWeakness() {
-        return Weakness;
+        return weakness;
     }
     public int getId() {
         return id;
     }
-    public static List<Task> all() {
-      String sql = "SELECT id, description, categoryId FROM tasks";
+    public int getSquadId() {
+        return squadId;
+    }
+
+    public static List<Hero> all() {
+      String sql = "SELECT id, name, squadId,age,power,weakness FROM heroes";
       try(Connection con = DB.sql2o.open()) {
-       return con.createQuery(sql).executeAndFetch(Task.class);
+       return con.createQuery(sql).executeAndFetch(Hero.class);
       }
     }
 
     @Override
-    public boolean equals(Object otherTask){
-      if (!(otherTask instanceof Task)) {
+    public boolean equals(Object otherHero){
+      if (!(otherHero instanceof Hero)) {
         return false;
       } else {
-        Task newTask = (Task) otherTask;
-        return this.getDescription().equals(newTask.getDescription()) &&
-               this.getId() == newTask.getId() &&
-               this.getCategoryId() == newTask.getCategoryId();
+        Task newTask = (Hero) otherHero;
+        return this.getName().equals(newHero.getName()) &&
+               this.getId() == newHero.getId() &&
+               this.getCategoryId() == newHero.getCategoryId();
       }
     }
 
@@ -72,5 +78,3 @@ public class Hero {
       }
     }
   }
-
-}
