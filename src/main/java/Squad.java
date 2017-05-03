@@ -12,10 +12,10 @@ public class Squad {
     public String getName() {
         return name;
     }
-    public static List<Category> all() {
-      String sql = "SELECT id, name FROM categories";
+    public static List<Squad> all() {
+      String sql = "SELECT id, name FROM squads";
       try(Connection con = DB.sql2o.open()) {
-        return con.createQuery(sql).executeAndFetch(Category.class);
+        return con.createQuery(sql).executeAndFetch(Squad.class);
       }
     }
 
@@ -23,39 +23,39 @@ public class Squad {
       return id;
     }
 
-   public static Category find(int id) {
+   public static Squad find(int id) {
        try(Connection con = DB.sql2o.open()) {
-         String sql = "SELECT * FROM categories where id=:id";
-         Category category = con.createQuery(sql)
+         String sql = "SELECT * FROM squads where id=:id";
+         Squad Squad = con.createQuery(sql)
            .addParameter("id", id)
-           .executeAndFetchFirst(Category.class);
-         return category;
+           .executeAndFetchFirst(Squad.class);
+         return Squad;
        }
      }
 
-   public List<Task> getTasks() {
+   public List<Hero> getHeroes() {
      try(Connection con = DB.sql2o.open()) {
-       String sql = "SELECT * FROM tasks where categoryId=:id";
+       String sql = "SELECT * FROM heroes where SquadId=:id";
        return con.createQuery(sql)
          .addParameter("id", this.id)
-         .executeAndFetch(Task.class);
+         .executeAndFetch(Hero.class);
      }
    }
 
    @Override
-   public boolean equals(Object otherCategory) {
-     if (!(otherCategory instanceof Category)) {
+   public boolean equals(Object otherSquad) {
+     if (!(otherSquad instanceof Squad)) {
        return false;
      } else {
-       Category newCategory = (Category) otherCategory;
-       return this.getName().equals(newCategory.getName()) &&
-              this.getId() == newCategory.getId();
+       Squad newSquad = (Squad) otherSquad;
+       return this.getName().equals(newSquad.getName()) &&
+              this.getId() == newSquad.getId();
      }
    }
 
     public void save() {
       try(Connection con = DB.sql2o.open()) {
-        String sql = "INSERT INTO categories(name) VALUES (:name)";
+        String sql = "INSERT INTO squads(name) VALUES (:name)";
         this.id = (int) con.createQuery(sql, true)
           .addParameter("name", this.name)
           .executeUpdate()
