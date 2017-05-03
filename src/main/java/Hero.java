@@ -50,10 +50,10 @@ public class Hero {
       if (!(otherHero instanceof Hero)) {
         return false;
       } else {
-        Task newTask = (Hero) otherHero;
+        Hero newHero = (Hero) otherHero;
         return this.getName().equals(newHero.getName()) &&
                this.getId() == newHero.getId() &&
-               this.getCategoryId() == newHero.getCategoryId();
+               this.getSquadId() == newHero.getSquadId();
       }
     }
 
@@ -61,20 +61,20 @@ public class Hero {
       try(Connection con = DB.sql2o.open()) {
         String sql = "INSERT INTO tasks(description, categoryId) VALUES (:description, :categoryId)";
         this.id = (int) con.createQuery(sql, true)
-          .addParameter("description", this.description)
-          .addParameter("categoryId", this.categoryId)
+          .addParameter("name", this.name)
+          .addParameter("squadId", this.squadId)
           .executeUpdate()
           .getKey();
       }
     }
 
-    public static Task find(int id) {
+    public static Hero find(int id) {
       try(Connection con = DB.sql2o.open()) {
-        String sql = "SELECT * FROM tasks where id=:id";
-        Task task = con.createQuery(sql)
+        String sql = "SELECT * FROM heroes where id=:id";
+        Hero hero = con.createQuery(sql)
           .addParameter("id", id)
-          .executeAndFetchFirst(Task.class);
-        return task;
+          .executeAndFetchFirst(Hero.class);
+        return hero;
       }
     }
   }
