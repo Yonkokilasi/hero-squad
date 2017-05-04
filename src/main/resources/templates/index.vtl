@@ -1,10 +1,10 @@
-<h1>Todo list!</h1>
+<h1>The Isrealites</h1>
 
-<h2>All lists:</h2>
+<h2>All Heroes:</h2>
 #if($squads)
 <p>Click on a Squad to see its heroes: </p>
 <ul>
-    #foreach (squad in $squads)
+    #foreach ($squad in $squads)
     <li><a href="/squads/squad.getId()">squad.getName()</a></li>
     #end
 </ul>
@@ -26,7 +26,7 @@
 <form action="/heroes" method="post">
 <label for="squadId">Select A squad</label>
 <select id=squadId" name=squadId" type="text">
-    #foreach(squad in $squads)
+    #foreach($squad in $squads)
         <option value="squad.getId">squad.getName()</option>
     #end
 </select>

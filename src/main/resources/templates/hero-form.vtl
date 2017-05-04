@@ -1,8 +1,19 @@
 <p>Add a new Hero:</p>
 
 <form action="/heroes" method="post">
-  <label for="name">Name of Hero</label>
-  <input id="name" name="name" type="text">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name">
 
-  <button type="submit" class="btn btn-default">Add task</button>
+        <label for="age">Age</label>
+        <input type="text" name="age" id="age">
+
+        <label for="power">Power</label>
+        <input type="text" name="power" id="power">
+
+        <label for="weakness">Weakness</label>
+        <input type="text" name="weakness" id="weakness">
+
+    </div>
+    <button type="submit" class="btn btn-success">Add</button>
 </form>
