@@ -1,0 +1,7 @@
+<h1>All Heroes</h1>
+<ul>
+  #foreach ($hero in $heroes)
+    <li><a href="/heros/$hero.getId()">$hero.getName()</a></li>
+  #end
+</ul>
+<a href="/heroes/new">Add New hero</a>
