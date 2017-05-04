@@ -35,7 +35,7 @@ public class App {
           }, new VelocityTemplateEngine());
 
 
-        post("/isrealites", (request,response) -> {
+        post("/heroes", (request,response) -> {
             Map<String, Object> model =  new HashMap <String, Object>();
             // ArrayList<Hero> heroes = request.session().attribute("heroes");
             // if (heroes == null) {
@@ -77,5 +77,11 @@ public class App {
               model.put("template","templates/success.vtl");
               return new ModelAndView(model, layout);
             }, new VelocityTemplateEngine());
+            get("/heroes/:id", (request, reponse)-> {
+                Map<String,Object>model = new HashMap<String, Object>();
+                Hero hero = Hero.find(Integer.parseInt(request.params(":id")));
+                model.put("hero",hero);
+                model.put("template","templates/hero.vtl"); return new ModelAndView(model, layout);
+            },new VelocityTemplateEngine());
       }
 }
