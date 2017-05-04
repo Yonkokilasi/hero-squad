@@ -59,7 +59,7 @@ public class Hero {
 
     public void save() {
       try(Connection con = DB.sql2o.open()) {
-        String sql = "INSERT INTO tasks(description, categoryId) VALUES (:description, :categoryId)";
+        String sql = "INSERT INTO heroes(description, categoryId) VALUES (:name, :squadId)";
         this.id = (int) con.createQuery(sql, true)
           .addParameter("name", this.name)
           .addParameter("squadId", this.squadId)
@@ -76,5 +76,11 @@ public class Hero {
           .executeAndFetchFirst(Hero.class);
         return hero;
       }
+    }
+    public void update(String name) {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "UPDATE tasks SET name = :name WHERE id = :id";
+            con.createQuery(sql).addParameter("name",name).addParameter("id",id).executeUpdate(); 
+        }
     }
   }
