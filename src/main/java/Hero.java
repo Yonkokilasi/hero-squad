@@ -11,7 +11,7 @@ public class Hero {
     private int squadId;
     private int id;
 
-    public Hero(String name, int age ,String power,String weakness) {
+    public Hero(String name, int age ,String power,String weakness, int squadId ) {
         this.name = name;
         this.age = age;
         this.power = power;
@@ -59,7 +59,7 @@ public class Hero {
 
     public void save() {
       try(Connection con = DB.sql2o.open()) {
-        String sql = "INSERT INTO heroes(description, categoryId) VALUES (:name, :squadId)";
+        String sql = "INSERT INTO heroes(name, squadId) VALUES (:name, :squadId)";
         this.id = (int) con.createQuery(sql, true)
           .addParameter("name", this.name)
           .addParameter("squadId", this.squadId)
@@ -80,7 +80,7 @@ public class Hero {
     public void update(String name) {
         try(Connection con = DB.sql2o.open()) {
             String sql = "UPDATE tasks SET name = :name WHERE id = :id";
-            con.createQuery(sql).addParameter("name",name).addParameter("id",id).executeUpdate(); 
+            con.createQuery(sql).addParameter("name",name).addParameter("id",id).executeUpdate();
         }
     }
   }

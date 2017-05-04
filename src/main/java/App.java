@@ -1,9 +1,8 @@
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
-import java.util.ArrayList;
 
 public class App {
   public static void main(String[] args) {
@@ -37,25 +36,16 @@ public class App {
 
         post("/heroes", (request,response) -> {
             Map<String, Object> model =  new HashMap <String, Object>();
-            // ArrayList<Hero> heroes = request.session().attribute("heroes");
-            // if (heroes == null) {
-            //     heroes = new ArrayList<Hero>();
-            //     request.session().attribute("heroes" , heroes);
-            // }
-            // String name = request.queryParams("name");
-            //
-            // int age = Integer.parseInt(request.queryParams("age"));
-            //
-            // String power = request.queryParams("power");
-            //
-            // String weakness = request.queryParams("weakness");
-            //
-            // Hero newHero = new Hero(name,age,power,weakness);
-            // model.put("newHero" , newHero);
-            // heroes.add(newHero);
               Squad squad = Squad.find(Integer.parseInt(request.queryParams("squadId")));
               String name = request.queryParams("name");
-              Hero newHero = new Hero(name,squad.getId());
+
+              int age = Integer.parseInt(request.queryParams("age"));
+
+              String power = request.queryParams("power");
+
+              String weakness = request.queryParams("weakness");
+
+             Hero newHero = new Hero(name, age ,power , weakness ,squad.getId());
               newHero.save();
               model.put("squad", squad);
               model.put("template", "templates/squad-hero-success.vtl");
